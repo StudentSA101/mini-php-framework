@@ -11,19 +11,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class RunWorker extends Command 
+class RunWorker extends Command
 {
-    protected static $defaultName = 'app:run-worker';
-  
-    public function __construct()
-    {
-      parent::__construct();
-    }
+  protected static $defaultName = 'app:run-worker';
+
+  public function __construct()
+  {
+    parent::__construct();
+  }
 
   protected function configure()
   {
     $this->setDescription('Processes queue data')
-        ->setHelp('This command allows you to process queue data');
+      ->setHelp('This command allows you to process queue data');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,15 +40,14 @@ class RunWorker extends Command
       $consumer = $context->createConsumer($queue);
       // Once the message is retrieved it is removed from redis.
       $message = $consumer->receive();
-      (new ImportJob)->process($message,$context);
-      $context->deleteQueue($queue);  
+      (new ImportJob)->process($message, $context);
+      $context->deleteQueue($queue);
       // For test running consumer within this file.
       // Setup multiple instances of application to consume queue. 
       // Save queue names in database for consistency
       return Command::SUCCESS;
-    } catch(Exception $e) {
+    } catch (Exception $e) {
       return Command::FAILURE;
     }
-  }   
-  
+  }
 }
