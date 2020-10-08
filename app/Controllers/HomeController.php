@@ -34,7 +34,7 @@ class HomeController
     public function timeZones($data)
     {
         parse_str($data, $query);
-        if(isset($query['timezone'])){
+        if (isset($query['timezone'])) {
             echo json_encode([
                 'Timezone' => $query['timezone'],
                 'total_contact' => Mock::where('tz', $query['timezone'])->get()->count(),
@@ -52,7 +52,7 @@ class HomeController
      */
     public function contact()
     {
-       echo json_encode(Mock::paginate(100));
+        echo json_encode(Mock::paginate(100));
     }
     /**
      * Should return the timezone data per local Timezone as per test
@@ -62,7 +62,7 @@ class HomeController
     public function localDateAndTime($data)
     {
         parse_str($data, $query);
-        if(isset($query['timezone'])){
+        if (isset($query['timezone'])) {
             echo json_encode([
                 'Timezone' => $query['timezone'],
                 'total_contact' => Mock::where('tz', $query['timezone'])->get()->count(),

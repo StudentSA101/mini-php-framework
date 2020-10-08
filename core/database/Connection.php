@@ -3,10 +3,11 @@
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
+
 /**
  * Database Connection
  */
-class Connection 
+class Connection
 {
     /**
      * Instance of Manager
@@ -50,6 +51,6 @@ class Connection
         } catch (Exception $e) {
             // handle the exception here
         }
-        return $this->capsule;   
+        return $this->capsule;
     }
 }

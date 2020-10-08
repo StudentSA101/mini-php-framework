@@ -33,7 +33,7 @@ class ImportJob implements Processor
         $data = json_decode($message->getBody(), true);
         // AntiXss to sanitize the horrible data in the note column
         $antiXss = new AntiXSS();
-        foreach($data as $record){
+        foreach ($data as $record) {
             Mock::create([
                 'id' => $record['id'],
                 'title' => $record['title'],
@@ -42,11 +42,11 @@ class ImportJob implements Processor
                 'email' => $record['email'],
                 'tz' => $record['tz'],
                 'date' => $record['date'],
-                'time' => Carbon::parse($record['date'].' '.$record['time'], $record['tz'])->setTimezone('Africa/Johannesburg'),
+                'time' => Carbon::parse($record['date'] . ' ' . $record['time'], $record['tz'])->setTimezone('Africa/Johannesburg'),
                 'note' => $antiXss->xss_clean($record['note']),
                 'ip_address' => gethostbyname(explode('@',  $record['email'])[1]),
                 'domain_exists' => $this->domainExists($record['email']),
-                'image_url' => $this->parseImage(null, $record['first_name'].' '.$record['last_name'].' '.$record['email'])
+                'image_url' => $this->parseImage(null, $record['first_name'] . ' ' . $record['last_name'] . ' ' . $record['email'])
             ]);
         }
         return self::ACK;
@@ -60,7 +60,7 @@ class ImportJob implements Processor
      */
     protected function domainExists($email, $record = 'MX')
     {
-        if(checkdnsrr(explode("@",$email)[1],$record)){
+        if (checkdnsrr(explode("@", $email)[1], $record)) {
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ class ImportJob implements Processor
             $text,
             $makeImage->getWidth() / 2,
             $makeImage->getHeight() / 2,
-            function($font){
+            function ($font) {
                 $font->size(500);
                 $font->color('#fdf6e3');
                 $font->align('center');
@@ -92,8 +92,7 @@ class ImportJob implements Processor
             }
         );
         $uuid = uniqid('', true);
-        $makeImage->save(__DIR__.'\..\..\public\\'.$uuid.'.jpeg');
-        return env('BASE_URL'). "/$uuid.jpeg";
+        $makeImage->save(__DIR__ . '\..\..\public\\' . $uuid . '.jpeg');
+        return env('BASE_URL') . "/$uuid.jpeg";
     }
-
 }

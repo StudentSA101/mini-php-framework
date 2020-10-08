@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mock extends Model{
-   
+class Mock extends Model
+{
+
    protected $table = 'mock_table';
 
    protected $fillable = [
@@ -22,5 +23,4 @@ class Mock extends Model{
       'domain_exists',
       'image_url'
    ];
-
 }

@@ -5,7 +5,7 @@ namespace App\BusinessLogic;
 use Carbon\Carbon;
 use App\Models\Mock;
 
-class ParseTimeZone 
+class ParseTimeZone
 {
     /**
      * A variable to hold the timezone
@@ -31,7 +31,7 @@ class ParseTimeZone
     public function parse()
     {
         $resultArray = [];
-        foreach ( Mock::where('tz', $this->timezone)->get()->toArray() as $key => $record){
+        foreach (Mock::where('tz', $this->timezone)->get()->toArray() as $key => $record) {
             $record['time'] = Carbon::parse($record['time'])->setTimezone($this->timezone)->format('Y-m-d H:i:s');
             $resultArray[$key] = $record;
         }

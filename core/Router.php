@@ -91,13 +91,14 @@ class Router
         if (array_key_exists($uri, $this->routes[$requestType])) {
             $route = explode('@', $this->routes[$requestType][$uri]);
             return $this->callAction(
-                $route[0],$route[1],$params
+                $route[0],
+                $route[1],
+                $params
             );
         }
         return $this->callAction(
             ...explode('@', $this->routes[$requestType]['/*'])
         );
-
     }
     /**
      * Function to call controller class method

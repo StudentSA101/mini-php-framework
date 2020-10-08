@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Capsule\Manager as DatabaseManager;
 
-class Migration 
+class Migration
 {
     /**
      * instance of DatabaseManager
@@ -26,8 +26,7 @@ class Migration
      */
     public function migrate()
     {
-        if (!$this->capsule::schema()->hasTable('mock_table'))
-        {
+        if (!$this->capsule::schema()->hasTable('mock_table')) {
             $this->capsule::schema()->create('mock_table', function ($table) {
                 $table->increments('id');
                 $table->string('email')->nullable();
@@ -45,5 +44,4 @@ class Migration
             });
         }
     }
-
 }
