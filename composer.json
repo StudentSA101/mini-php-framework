@@ -1,6 +1,11 @@
 {
     "name": "dev/test",
     "description": "HyveMobileTest",
+    "authors": [
+       {
+        "name": "Charles Pierre Davis"
+       }
+    ],
     "require": {
         "php": "^7.4",
         "illuminate/database": "^8.0",

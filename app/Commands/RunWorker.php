@@ -44,7 +44,6 @@ class RunWorker extends Command
       $context->deleteQueue($queue);
       // For test running consumer within this file.
       // Setup multiple instances of application to consume queue. 
-      // Save queue names in database for consistency
       return Command::SUCCESS;
     } catch (Exception $e) {
       return Command::FAILURE;
